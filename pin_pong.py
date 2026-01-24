@@ -10,6 +10,7 @@ WIDTH = 800
 HEIGHT = 990
 #-------
 text = "GAME OVER"
+text2 = "repit?? button 'R'"
 score = 0
 ARIAL_FONT_PATH = pg.font.match_font('arial')
 ARIAL_FONT_48 = pg.font.Font(ARIAL_FONT_PATH,48)
@@ -54,10 +55,19 @@ while running:
             running = False
             game_over = True
             continue
-        elif event.type == pg.K_ESCAPE:
-            running = False
-            game_over = True
-            continue
+        elif event.type == pg.KEYDOWN:
+            if event.type == pg.K_ESCAPE:
+                running = False
+                game_over = True
+                continue
+            #---R----restart---
+            elif event.key == pg.K_r and game_over:
+                score = 0
+                game_over = False
+                CIRCLE_Speed_x = random.choice([CIRCLE_Speed, -CIRCLE_Speed])
+                CIRCLE_Speed_y = CIRCLE_Speed
+                circle_rect.center = (WIDTH // 2, HEIGHT // 4)
+                pozition_rect.centerx = WIDTH // 2
     #--------------------
     if not game_over:
         keys = pg.key.get_pressed()
@@ -70,7 +80,16 @@ while running:
             game_over = True
         elif circle_rect.top <= 0:
             CIRCLE_Speed_y += CIRCLE_Speed
+            #----score-----+
             score += 1
+            if score >=5:
+                score += 2
+            elif score >= 45:
+                score +=4
+            elif score >= 65:
+                score += 5
+            elif score >= 90:
+                score += 8
         elif circle_rect.left  <= 0:
             CIRCLE_Speed_x += CIRCLE_Speed
         elif circle_rect.right  >= WIDTH:
@@ -100,6 +119,10 @@ while running:
     #--screen--font--
     score_surface = ARIAL_FONT_48.render(str(score),True, WHITE)
     screen.blit(score_surface,[WIDTH /2 - score_surface.get_width() /2,15])
+    #--screen-font-restart--
+    if game_over == True:
+        score_surface = ARIAL_FONT_48.render(str(text2),True, WHITE)
+        screen.blit(score_surface,[WIDTH /2 - score_surface.get_width() /2,250])
     #--screen--font--gameOver--
     if game_over == True:
         score_surface = ARIAL_FONT_48.render(str(text),True, WHITE)
