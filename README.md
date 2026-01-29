@@ -1,4 +1,5 @@
 🏓 Pin-Pong Game
+<img width="801" height="1025" alt="Снимок экрана_20260129_194443" src="https://github.com/user-attachments/assets/14b4792a-681d-4d99-81ea-ed6cd72f7fa5" />
 
 Простая игра в пинг-понг, написанная на Python с использованием библиотеки Pygame.
 🎮 Особенности игры
